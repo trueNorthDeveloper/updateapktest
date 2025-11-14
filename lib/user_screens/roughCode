@@ -1,0 +1,36 @@
+ String title="";
+
+Future<void> sendSurvey() async {
+  final url = Uri.parse('http://192.168.1.30:8585/api/v1/surveys/jpa');
+
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + base64Encode(utf8.encode('admin:admin123')),
+  };
+
+  final body = jsonEncode({
+    "title": "hey how are hii",
+    "description": "new aoi reques",
+    "location": "device api  mobile",
+  });
+
+  try {
+    final response = await http.post(url, headers: headers, body: body);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+         final responseData = jsonDecode(response.body);
+    final id = responseData['id'];
+
+    setState(() {
+          final title = responseData['new tittle'];
+    });
+    final desc = responseData['description'];
+    final location = responseData['location'];
+      print('✅ Success: ${response.body}');
+    } else {
+      print('❌ Failed: ${response.statusCode} - ${response.body}');
+    }
+  } catch (e) {
+    print('⚠️ Error: $e');
+  }
+}

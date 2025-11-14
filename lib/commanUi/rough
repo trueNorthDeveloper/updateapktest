@@ -1,0 +1,523 @@
+ SafeArea(
+        child: SizedBox(
+          height: SizeConFig.screenHeight,
+          width: SizeConFig.screenWidth,
+          child: Column(
+            children: [
+              SizedBox(
+                width: SizeConFig.screenWidth * 0.95,
+                child: Column(
+                  children: [
+                    //SizedBox(height: SizeConFig.screenHeight * 3 / 100),
+                    Container(
+                      height: SizeConFig.screenHeight * 0.25,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 232, 235, 230),
+                          width: 2,
+                          style: BorderStyle.values[1],
+                        ),
+                      ),
+                      child: Center(child: Text("Progrees bar")),
+                    ),
+
+                    //
+                    // Container(
+                    //   height: SizeConFig.screenHeight * 0.50,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.all(Radius.circular(20)),
+                    //     color: const Color.fromARGB(255, 235, 235, 235),
+                    //     border: Border.all(
+                    //       color: const Color.fromARGB(255, 245, 244, 244),
+                    //       width: 2,
+                    //       style: BorderStyle.values[1],
+                    //     ),
+                    //   ),
+                    //   // child: ListView.builder(
+                    //   //   itemCount: 20,
+                    //   //   scrollDirection: Axis.horizontal,
+
+                    //   //   itemBuilder: (context, index) {
+                    //   //     return Row(
+                    //   //       children: [
+                    //   //         Container(
+                    //   //           height: SizeConFig.screenHeight * 0.1,
+                    //   //           width: SizeConFig.screenWidth * 0.30,
+                    //   //           decoration: BoxDecoration(
+                    //   //             borderRadius: BorderRadius.all(
+                    //   //               Radius.circular(20),
+                    //   //             ),
+                    //   //             color: const Color.fromARGB(
+                    //   //               255,
+                    //   //               254,
+                    //   //               253,
+                    //   //               253,
+                    //   //             ),
+                    //   //             border: Border.all(
+                    //   //               color: const Color.fromARGB(
+                    //   //                 255,
+                    //   //                 245,
+                    //   //                 244,
+                    //   //                 244,
+                    //   //               ),
+                    //   //               width: 2,
+                    //   //               style: BorderStyle.values[1],
+                    //   //             ),
+                    //   //           ),
+                    //   //           child: Text("hello"),
+                    //   //         ),
+                    //   //         // SizedBox(height: 5),
+                    //   //       ],
+                    //   //     );
+                    //   //   },
+                    //   // ),
+                    //   child:Row(
+                    //     children: [
+                    //       Text("hii"),
+                    //       Text("hello")
+                    //     ],
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+=======================================
+ Consumer<LoginProvider>(
+                            builder: (context, log2ourt, child) {
+                          return log2ourt.isLoggingOut
+                              ? Center(
+                                  child: LoadingAnimationWidget.inkDrop(
+                                    color: Color(0xfffb934d),
+                                    size: 50,
+                                  ),
+                                )
+                              : Center(
+                                  child: Text("ee"),
+                                );
+                        }),
+===========================
+SizedBox(
+                width: SizeConFig.screenWidth * 95 / 100,
+                child: Column(
+                  children: [
+                    
+                   
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            ShowTaostMessage.toastMessage(
+                              context,
+                              "help amd suppport",
+                            );
+                          },
+                          child: Text("Help & Support"),
+                        ),
+                        Consumer<LoginProvider>(builder: (context, log, child) {
+                          return ElevatedButton(
+                              onPressed: () async {
+                                bool status =
+                                    await showLogoutConfirmationDialog(context);
+
+                                if (status) {
+                                  //logoutAnimation;
+                                  log.userlLogout();
+                                }
+                              },
+                              child: Text("Logout"));
+                        }),
+                        // Consumer<LoginProvider>(
+                        //     builder: (context, log2ourt, child) {
+                        //   return log2ourt.isLoggingOut
+                        //       ? Center(
+                        //           child: LoadingAnimationWidget.inkDrop(
+                        //             color: Color(0xfffb934d),
+                        //             size: 50,
+                        //           ),
+                        //         )
+                        //       : Center(
+                        //           child: Text("ee"),
+                        //         );
+                        // }),
+                      ],
+                    ),
+                    SizedBox(height: SizeConFig.screenHeight * 1 / 100),
+                    Container(
+                      height: SizeConFig.screenHeight * 10 / 100,
+                      width: SizeConFig.screenWidth * 20 / 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage(Appimage.profilePic),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    Consumer<UserDashboardProvider>(
+                      builder: (context, useFun, child) {
+                        return Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                useFun.chnageColorOnOff();
+                              },
+                              child: Icon(
+                                Icons.view_agenda,
+                                size: SizeConFig.screenWidth * 10 / 100,
+                                color: useFun.changeColor
+                                    ? Colors.black
+                                    : Colors.blue,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    SizedBox(height: SizeConFig.screenHeight * 1 / 100),
+                    Consumer<UserDashboardProvider>(
+                      builder: (context, userFun2, child) {
+                        return userFun2.changeColor
+                            ? Container()
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  customBox(
+                                      "Project", context, UserAllProject()),
+                                  customBox("Attendance", context),
+                                  customBox("Leave", context),
+                                ],
+                              );
+                      },
+                    ),
+                    SizedBox(height: SizeConFig.screenHeight * 1 / 100),
+                    Consumer<UserDashboardProvider>(
+                      builder: (context, use3, child) {
+                        return use3.changeColor
+                            ? Container()
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  customBox("Report", context),
+                                  customBox("To Do", context),
+                                  customBox("My chart", context),
+                                ],
+                              );
+                      },
+                    ),
+                    SizedBox(height: SizeConFig.screenHeight * 1 / 100),
+                    Consumer<UserDashboardProvider>(
+                      builder: (context, use4, child) {
+                        return use4.changeColor
+                            ? Container()
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  customBox("Instrument Libary", context),
+                                  customBox("Expenses", context),
+                                  customBox("High Priority", context),
+                                ],
+                              );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              =====================date 14-7 
+              Consumer<LoginProvider>(builder: (context, log2ourt, child) {
+            return log2ourt.isLoggingOut
+                ? Container(
+                    width: SizeConFig.screenWidth * 50 / 100,
+                    height: SizeConFig.screenHeight * 10 / 100,
+                    child: Center(
+                      child: LoadingAnimationWidget.inkDrop(
+                        color: Color(0xfffb934d),
+                        size: 150,
+                      ),
+                    ),
+                  )
+                :  Future<void> sendSurvey() async {
+   
+    final url = Uri.parse(Apiconstants.login);
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + base64Encode(utf8.encode('admin:admin123')),
+    };
+
+    final body = jsonEncode({
+        "empLoginId":"TNE01",
+    "empPassword":"Ron1000",
+    "board": "arm64",
+  "device": "Samsung",
+  "deviceId": "ABC123",
+  "deviceBrand":"Samsung",
+  "model": "Galaxy A52",
+  "latitude": "22.7196",
+  "longitude": "75.8577",
+  "address": "Indore, MP"
+
+   
+    });
+
+    try {
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // final responseData = jsonDecode(response.body);
+        // final id = responseData['id'];
+
+       
+        // final desc = responseData['description'];
+        // final location = responseData['location'];
+        print('${response.body}');
+      } else {
+        print('${response.statusCode} - ${response.body}');
+      }
+    } catch (e) {
+      print('⚠️ Error: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(height: 50),
+
+    //       Center(
+    //         child: TextButton(
+    //           onPressed: () {
+    //             sendSurvey();
+              
+    //           },
+    //           child: Text("api fatch"),
+    //         ),
+    //       ),
+    //       Center(
+    //         child:TextButton(onPressed: ()async {
+    //            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // String? id =await prefs.getString('loginId');
+    // String? password =await prefs.getString('password');
+    // print(id);
+    // print(password);
+
+    
+              
+    //         }, child:Text("get value")),
+    //       ),
+    //       Center(
+    //         child:TextButton(onPressed: () async{
+    //            SharedPreferences prefs = await SharedPreferences.getInstance();
+    //            prefs.clear();
+              
+    //         }, child:Text("clear shared")),
+    //       )
+    Center(
+      child:ElevatedButton(onPressed: () {
+        
+      }, child: Text("open camera")),
+    )
+          
+        ],
+      ),
+    );
+  }
+   late List<CameraDescription> _cameras;
+  Future<void> opencamera()async
+  {
+     _cameras = await availableCameras();
+    
+  }
+  =====================================
+  <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+ <uses-permission android:name="android.permission.CAMERA"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <application
+        android:label="TrueNo"
+        android:name="${applicationName}"
+
+        android:icon="@mipmap/launcher_icon">
+        
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+   <!-- <provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.fileprovider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider> -->
+
+
+            
+   
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>
+==============================================================
+ List deviceInfo = await getDeviceInfo();
+        if (deviceInfo.isEmpty) {
+          _isLoading = false;
+          notifyListeners();
+          if (context.mounted) {
+            ShowTaostMessage.toastMessage(context, "Failed to get device info");
+          }
+          return;
+        }
+
+        Position? position = await _deteminPosition(context);
+        if (position == null) {
+          _isLoading = false;
+          notifyListeners();
+          if (context.mounted) {
+            ShowTaostMessage.toastMessage(context, "Failed to get location");
+          }
+          return;
+        }
+
+        String address = await _getAddressFromLatLng(
+          position.latitude,
+          position.longitude,
+        );
+
+        XFile? imagePath = await pickImage(ImageSource.camera);
+        ;
+        if (imagePath == null) {
+          _isLoading = false;
+          notifyListeners();
+
+          return;
+        }
+
+        int imgId = await uploadLoginImage(imagePath.path, "loginImage");
+
+        LoginRequestModel loginRequestModel = LoginRequestModel(
+            empLoginId: userId,
+            empPassword: password,
+            device: deviceInfo[0],
+            deviceId: deviceInfo[1],
+            deviceBrand: deviceInfo[2],
+            model: deviceInfo[3],
+            latitude: position.latitude.toString(),
+            longitude: position.longitude.toString(),
+            address: address,
+            loginImage: LoginImage(imageId: imgId));
+        print(loginRequestModel.toJson());
+
+        Map<String, dynamic> apiResponse =
+            await loginWithIdAndPassword(loginRequestModel.toJson(), context);
+
+        if (apiResponse.isEmpty) {
+          _isLoading = false;
+          ShowTaostMessage.toastMessage(context, "login failed");
+          notifyListeners();
+          return;
+        }
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('empId', apiResponse['EmpID'] ?? '');
+        await prefs.setString('empName', apiResponse['empName'] ?? '');
+        await prefs.setString('empRole', apiResponse['empRole'] ?? '');
+        await prefs.setString('sessionId', apiResponse['sessionId'] ?? '');
+        await prefs.setInt('uuid', apiResponse['uuid']);
+
+        // // prefs.setString("loginId",userId);
+        // // prefs.setString("password", password);
+
+        // // print(prefs.getString("empId"));
+        // // print(prefs.getString("empName"));
+        // // print(prefs.getString("empRole"));
+        // // print(prefs.getString("sessionId"));
+        // // print(prefs.getInt("uuid"));
+
+        String sestr = await prefs.getString("sessionId") ?? "";
+        print("sessio id is${sestr}");
+        //THIS API FUNCTION UPDATE IMAGE ID................
+
+        String linkId = imgId.toString();
+        //  String str = Integer.toString(number);
+        await updateImageWithApi(
+          linkId,
+          sestr,
+        );
+
+        ShowTaostMessage.toastMessage(context, "Login Successfully");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MapinScreen(),
+          ),
+        );
+
+        _isLoading = false;
+        notifyListeners();
+      } else {
+        if (context.mounted) {
+          ShowTaostMessage.toastMessage(context, "Invalid user role");
+        }
+      }
